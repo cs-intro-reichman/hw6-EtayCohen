@@ -19,7 +19,7 @@ public class TesterRunigram {
                 System.out.println("FAILED");
             }
         }
-        
+
         if (testName.equals("horizontal")) {
             // Testing Runigram.flippedHorizontally
             System.out.println("Testing Runigram.flippedHorizontally...");
@@ -70,12 +70,12 @@ public class TesterRunigram {
             }
         }
 
-
         // Color[][] img = Runigram.scaled(safeRead("eyes.ppm"), 241, 209);
-        // Color[][] img = Runigram.blend(safeRead("escher.ppm"), safeRead("eyes.ppm"), 0.21);
+        // Color[][] img = Runigram.blend(safeRead("escher.ppm"), safeRead("eyes.ppm"),
+        // 0.21);
         // int a = 2;
         // savePPM("blend_021.ppm", img);
-        
+
     }
 
     /**
@@ -83,7 +83,7 @@ public class TesterRunigram {
      */
     public static boolean testRead(String imgPath) {
         Color[][] imgTiny = safeRead("tinypic.ppm");
-        
+
         if (imgTiny == null) {
             return false;
         }
@@ -122,21 +122,20 @@ public class TesterRunigram {
     public static boolean testFlipHorizontally() {
         Color[][] flipped = Runigram.flippedHorizontally(safeRead("thor.ppm"));
         Color[][] res = safeRead("expected_results/horizontal.ppm");
-        
+
         if (flipped == null || res == null) {
             return false;
         }
         return compareImages(flipped, res);
     }
 
-    
     /**
      * A tested function for the Runigram.FlipVertically function.
      */
     public static boolean testFlipVertically() {
         Color[][] flipped = Runigram.flippedVertically(safeRead("thor.ppm"));
         Color[][] res = safeRead("expected_results/vertical.ppm");
-        
+
         if (flipped == null || res == null) {
             return false;
         }
@@ -149,7 +148,7 @@ public class TesterRunigram {
     public static boolean testGrayScaled() {
         Color[][] flipped = Runigram.grayScaled(safeRead("xmen.ppm"));
         Color[][] res = safeRead("expected_results/xmen_gray.ppm");
-        
+
         if (flipped == null || res == null) {
             return false;
         }
@@ -158,7 +157,7 @@ public class TesterRunigram {
 
         flipped = Runigram.grayScaled(safeRead("cake.ppm"));
         res = safeRead("expected_results/cake_gray.ppm");
-        
+
         if (flipped == null || res == null) {
             return false;
         }
@@ -171,7 +170,7 @@ public class TesterRunigram {
     public static boolean testScaled() {
         Color[][] flipped = Runigram.scaled(safeRead("ironman.ppm"), 100, 150);
         Color[][] res = safeRead("expected_results/ironman_100_150.ppm");
-        
+
         if (flipped == null || res == null) {
             return false;
         }
@@ -180,7 +179,7 @@ public class TesterRunigram {
 
         flipped = Runigram.scaled(safeRead("ironman.ppm"), 600, 400);
         res = safeRead("expected_results/ironman_600_400.ppm");
-        
+
         if (flipped == null || res == null) {
             return false;
         }
@@ -196,7 +195,7 @@ public class TesterRunigram {
 
         Color[][] blended = Runigram.blend(img1, img2, 0);
         Color[][] res = img2;
-        
+
         if (blended == null || res == null) {
             return false;
         }
@@ -204,16 +203,15 @@ public class TesterRunigram {
 
         blended = Runigram.blend(img1, img2, 0.21);
         res = safeRead("expected_results/blend_021.ppm");
-        
+
         if (blended == null || res == null) {
             return false;
         }
         boolean res2 = compareImages(blended, res);
 
-
         blended = Runigram.blend(img1, img2, 0.5);
         res = safeRead("expected_results/blend_05.ppm");
-        
+
         if (blended == null || res == null) {
             return false;
         }
@@ -221,7 +219,7 @@ public class TesterRunigram {
 
         blended = Runigram.blend(img1, img2, 0.75);
         res = safeRead("expected_results/blend_075.ppm");
-        
+
         if (blended == null || res == null) {
             return false;
         }
@@ -229,17 +227,17 @@ public class TesterRunigram {
 
         blended = Runigram.blend(img1, img2, 1);
         res = img1;
-        
+
         if (blended == null || res == null) {
             return false;
         }
         boolean res5 = compareImages(blended, res);
-        
+
         return res1 && res2 && res3 && res4 && res5;
     }
 
-
-    // ========================================== Helper functions ===========================================
+    // ========================================== Helper functions
+    // ===========================================
 
     public static Color[][] safeRead(String imgPath) {
         try {
@@ -255,8 +253,8 @@ public class TesterRunigram {
 
     public static boolean compareColors(Color c1, Color c2) {
         return c1.getRed() == c2.getRed() &&
-               c1.getGreen() == c2.getGreen() &&
-               c1.getBlue() == c2.getBlue();
+                c1.getGreen() == c2.getGreen() &&
+                c1.getBlue() == c2.getBlue();
     }
 
     public static boolean compareImages(Color[][] img1, Color[][] img2) {
@@ -272,9 +270,9 @@ public class TesterRunigram {
             }
         }
         return true;
-    } 
+    }
 
-    public static void savePPM(String filename, Color[][] pixels)  {
+    public static void savePPM(String filename, Color[][] pixels) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
             // Write the PPM header
             writer.write("P3\n");
@@ -284,7 +282,7 @@ public class TesterRunigram {
             // Write pixel data
             for (int y = 0; y < pixels.length; y++) {
                 for (int x = 0; x < pixels[0].length; x++) {
-                    int[] rgb = {pixels[y][x].getRed(), pixels[y][x].getGreen(), pixels[y][x].getBlue()};
+                    int[] rgb = { pixels[y][x].getRed(), pixels[y][x].getGreen(), pixels[y][x].getBlue() };
                     writer.write(rgb[0] + " " + rgb[1] + " " + rgb[2] + " ");
                 }
                 writer.newLine(); // Newline at the end of each row
@@ -295,8 +293,4 @@ public class TesterRunigram {
         }
     }
 
-    
 }
-
-
-
